@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add or Delete Item</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            margin: 20px;
+        }
+        .receipt-input {
+            font-size: 0.9rem;
+        }
+        .amount-input {
+            width: 150px;
+            font-size: 0.9rem;
+        }
+        .spacer {
+            margin-top: 10px;
+        }
+        .search-bar {
+            margin-bottom: 20px;
+        }
+        .flashes {
+            margin: 20px 0;
+        }
+        .flashes .success {
+            color: green;
+        }
+        .flashes .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Inventory Management</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="/billing">Billing</a></li>
+                <li class="nav-item"><a class="nav-link" href="/report">Reports</a></li>
+                <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <header>
+            <h1>Add or Delete Item</h1>
+        </header>
+
+        <!-- Display flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flashes">
+                    {% for category, message in messages %}
+                        <div class="{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Add/Delete Form -->
+        <form id="item-form" method="POST" action="{{ url_for('add_delete_item') }}">
+            <div class="form-group">
+                <label for="action">Action:</label>
+                <select id="action" name="action" class="form-control" required>
+                    <option value="null">select</option>
+					<option value="add">Add</option>
+                    <option value="delete">Delete</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="item_name">Item Name:</label>
+                <input type="text" id="item_name" name="item_name" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" class="form-control" required>
+            </div>
+
+            <!-- New threshold input field -->
+            <div class="form-group" id="threshold-group">
+                <label for="threshold">Threshold:</label>
+                <input type="number" id="threshold" name="threshold" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <!-- Inventory List -->
+        <h2 class="mt-4">Current Inventory</h2>
+        <table class="table table-striped table-bordered" id="inventory-list">
+            <thead>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Quantity</th>
+                    <th>Threshold</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if items %}
+                    {% for item in items %}
+                        <tr>
+                            <td>{{ item['item_name'] }}</td>
+                            <td>{{ item['quantity'] }}</td>
+                            <td>{{ item['threshold'] }}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="3" class="text-center">No items found in inventory</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+   <footer class="mt-4">
+        <div class="container text-center">
+            <b><p>Email: Viraliimpact@gmail.com</p></b>
+            <b><p>&copy; 2024 Viral iImpact - Developed by Viral iImpact</p></b>
+        </div>
+    </footer>
+
+    <script>
+        // Hide threshold input field when action is 'delete'
+        $(document).ready(function() {
+            $('#threshold-group').hide();  // Initially hide the threshold input
+            $('#action').on('change', function() {
+                if ($(this).val() === 'add') {
+                    $('#threshold-group').show();  // Show when adding
+                } else {
+                    $('#threshold-group').hide();  // Hide when deleting
+                }
+            });
+        });
+    </script>
+</body>
+</html>

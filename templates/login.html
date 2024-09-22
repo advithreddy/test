@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            background-image: url('/static/css/4.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100vh; /* Ensures the background covers the entire viewport */
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Sri Raja Rajeshwara Paints Inventory Management</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <!-- Additional navigation items can go here -->
+        </div>
+    </nav>
+
+    <div class="container d-flex justify-content-center align-items-center" style="height: 80vh;">
+        <div class="col-md-4">
+            <h2 class="text-center">Login</h2>
+
+            <!-- Display flash messages for login status -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="alert alert-info">
+                        <ul>
+                            {% for category, message in messages %}
+                                <li class="{{ category }}">{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <form action="/" method="POST" class="mt-4">
+                <div class="form-group">
+                    <input type="text" id="username" placeholder="Username" name="username" class="form-control form-control-sm" required aria-label="Username">
+                </div>
+
+                <div class="form-group">
+                    <input type="password" id="password" placeholder="Password" name="password" class="form-control form-control-sm" required aria-label="Password">
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Footer -->
+    <footer class="mt-4">
+        <div class="container text-center">
+            <b><p>Email: Viraliimpact@gmail.com</p></b>
+            <b><p>&copy; 2024 Viral iImpact - Developed by Viral iImpact</p></b>
+        </div>
+    </footer>
+</body>
+</html>

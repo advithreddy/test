@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <style>
+        body {
+            background-image: url('/static/css/4.jpg');
+            background-size: cover; /* Optional: to cover the entire area */
+            background-repeat: no-repeat; /* Optional: to avoid repeating the image */
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SriRajaRajeshwara Paints</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <center><a class="navbar-brand" href="#">Inventory Managment</a></center>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+    <title>Sri Raja Rajeshwara Paints </title>
+   
+       <center> <h2 style="color:white">Sri Raja Rajeshwara Paints Inventory managment</h2></center><br>
+
+        <!-- Display flash messages for actions -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="alert alert-info">
+                    <ul>
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Billing</h5>
+                        <p class="card-text">Manage customer billing and invoices.</p>
+                        <a href="/billing" class="btn btn-success">Go to Billing</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Low Stock Items</h5>
+                        <p class="card-text">View items that are running low on stock.</p>
+                        <a href="/low_stock" class="btn btn-warning">View Low Stock</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Update Stock</h5>
+                        <p class="card-text">Quickly update stock levels for items.</p>
+                        <a href="/update_stock" class="btn btn-secondary">Update Stock</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Stock</h5>
+                        <p class="card-text">Quickly check inventory levels.</p>
+                        <a href="/check_inventory" class="btn btn-secondary">Check Inventory</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Reports</h5>
+                        <p class="card-text">Generate and view inventory reports.</p>
+                        <a href="/report" class="btn btn-info">View Reports</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Add/Delete Item</h5>
+                        <p class="card-text">Manage your inventory items efficiently.</p>
+                        <a href="/add_delete_item" class="btn btn-primary">Manage Items</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <footer class="mt-4">
+        <div class="container text-center">
+            <b><p>Email: Viral.iimpact@gmail.com</p></b>
+            <b><p>&copy; 2024 Viral iImpact - Developed by Viral iImpact</p></b>
+        </div>
+    </footer>
+</body>
+</html>

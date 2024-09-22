@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Inventory</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar-custom {
+            background-color: #343a40;
+        }
+        .navbar-custom .navbar-brand,
+        .navbar-custom .nav-link {
+            color: #ffffff;
+        }
+        .navbar-custom .nav-link:hover {
+            color: #d1d1d1;
+        }
+        .table-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        #searchInput {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <a class="navbar-brand" href="#">Inventory Management</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Check Inventory</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/update_stock">Update Stock</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/add_item">Add Item</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Inventory Table -->
+    <div class="container mt-4 table-container">
+        <h2 class="text-center">Inventory List</h2>
+        <div class="form-group">
+            <input type="text" class="form-control" id="searchInput" placeholder="Search for items..." onkeyup="filterTable()">
+        </div>
+
+        <table class="table table-bordered table-hover" id="inventoryTable">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Item Name</th>
+                    <th>Quantity</th>
+                    <th>Last Updated</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item['item_name'] }}</td>
+                    <td>{{ item['quantity'] }}</td>
+                    <td>{{ item['last_date'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function filterTable() {
+            var input = document.getElementById("searchInput");
+            var filter = input.value.toLowerCase();
+            var table = document.getElementById("inventoryTable");
+            var tr = table.getElementsByTagName("tr");
+
+            for (var i = 1; i < tr.length; i++) {
+                var tdName = tr[i].getElementsByTagName("td")[0];
+                var tdQuantity = tr[i].getElementsByTagName("td")[1];
+                var tdDate = tr[i].getElementsByTagName("td")[2];
+
+                if (tdName || tdQuantity || tdDate) {
+                    var textValue = (
+                        tdName.textContent ||
+                        tdName.innerText ||
+                        tdQuantity.textContent ||
+                        tdQuantity.innerText ||
+                        tdDate.textContent ||
+                        tdDate.innerText
+                    ).toLowerCase();
+
+                    tr[i].style.display = textValue.includes(filter) ? "" : "none";
+                }
+            }
+        }
+		
+    </script>
+	<footer class="mt-4">
+        <div class="container text-center">
+            <b><p>Email: Viraliimpact@gmail.com</p></b>
+            <b><p>&copy; 2024 Viral iImpact - Developed by Viral iImpact</p></b>
+        </div>
+    </footer>
+</body>
+</html>
